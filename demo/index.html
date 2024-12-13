@@ -20,12 +20,15 @@
   </script>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="http://cyntss.github.io/Parallax-img-scroll/">Home</a><a href="http://cynt.co.nf/">Cyntss Page</a><a href="">Documentation</a>
-    </nav>
-  </header>
+  <div id="countdown-container">
+    <h2>Countdown Timer</h2>
+    <div id="countdown-timer">00:00:00</div>
+  </div>
+  
+  
   <section>
+    
+    
     <article class="parallax-img-container">
       <h1>Parallax Image Scroll</h1>
       <h3>Give life to your website</h3>
@@ -40,7 +43,7 @@
       <img src="img/assassins/smoke-07.png" class="parallax-move" data-ps-z-index="1" data-ps-speed="0.3" data-ps-vertical-position="300" data-ps-horizontal-position="320" />
       <img src="img/assassins/smoke-06.png" class="parallax-move" data-ps-z-index="1" data-ps-speed="0.2" data-ps-vertical-position="-900" data-ps-horizontal-position="220" />
       <img src="img/assassins/smoke-05.png" class="parallax-move" data-ps-z-index="1" data-ps-speed="0.3" data-ps-vertical-position="-600" data-ps-horizontal-position="150" />
-      <img src="img/assassins/stick.png" class="parallax-move" data-ps-z-index="2" data-ps-speed="1" data-ps-vertical-position="1200" data-ps-horizontal-position-right="0" />
+      <img src="img/assassins/stick.png" class="parallax-move" data-ps-z-index="2" data-ps-speed="1" data-ps-vertical-position="1000" data-ps-horizontal-position-right="0" />
       <img src="img/assassins/003.png" class="parallax-move" data-ps-z-index="2" data-ps-speed="0.4" data-ps-vertical-position="-200" data-ps-horizontal-position="0" />
       <img src="img/assassins/002.png" class="parallax-move" data-ps-z-index="3" data-ps-speed="0.5" data-ps-vertical-position="-400" data-ps-horizontal-position="0" />
       <img src="img/assassins/birds.png" class="parallax-move" data-ps-z-index="4" data-ps-speed="1" data-ps-vertical-position="-300" data-ps-horizontal-position="600" />
@@ -65,5 +68,39 @@
       <img id="parallax-img-3" class="parallax-move" data-ps-vertical-position="200" data-ps-horizontal-position="500" src="img/circle.png" />
     </article>
     
+  </section>
+  <script>
+    function startCountdown(targetDate) {
+      const countdownElement = document.getElementById("countdown-timer");
+  
+      function updateCountdown() {
+        const now = new Date();
+        const difference = targetDate - now;
+  
+        if (difference <= 0) {
+          countdownElement.innerText = "00:00:00";
+          clearInterval(interval);
+          return;
+        }
+  
+        const hours = String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(2, "0");
+        const minutes = String(Math.floor((difference / (1000 * 60)) % 60)).padStart(2, "0");
+        const seconds = String(Math.floor((difference / 1000) % 60)).padStart(2, "0");
+  
+        countdownElement.innerText = `${hours}:${minutes}:${seconds}`;
+      }
+  
+      const interval = setInterval(updateCountdown, 1000);
+      updateCountdown();
+    }
+  
+    // Set target date and start countdown
+    const targetDate = new Date(new Date().getTime() + 2 * 60 * 60 * 1000); // 2 hours from now
+    startCountdown(targetDate);
+  </script>
+  
+  <footer>
+    <p>made by Yogesh Jat</p>
+  </footer>
 </body>
 </html>
